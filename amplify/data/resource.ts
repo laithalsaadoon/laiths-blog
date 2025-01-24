@@ -1,17 +1,100 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
 const schema = a.schema({
-  Todo: a
+  Author: a
     .model({
-      content: a.string(),
+      name: a.string().required(),
+      bio: a.string(),
+      avatar: a.string(),
+      posts: a.hasMany('Post', 'authorId'),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  Post: a
+    .model({
+      title: a.string().required(),
+      content: a.string().required(),
+      slug: a.string().required(),
+      status: a.enum(['DRAFT', 'PUBLISHED']),
+      publishDate: a.datetime(),
+      featuredImage: a.string(),
+      excerpt: a.string(),
+      authorId: a.id().required(),
+      author: a.belongsTo('Author', 'authorId'),
+      comments: a.hasMany('Comment', 'postId'),
+      tags: a.hasMany('PostTag', 'postId'),
+      categories: a.hasMany('PostCategory', 'postId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  Category: a
+    .model({
+      name: a.string().required(),
+      slug: a.string().required(),
+      description: a.string(),
+      posts: a.hasMany('PostCategory', 'categoryId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  Tag: a
+    .model({
+      name: a.string().required(),
+      slug: a.string().required(),
+      posts: a.hasMany('PostTag', 'tagId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  PostTag: a
+    .model({
+      postId: a.id().required(),
+      tagId: a.id().required(),
+      post: a.belongsTo('Post', 'postId'),
+      tag: a.belongsTo('Tag', 'tagId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  PostCategory: a
+    .model({
+      postId: a.id().required(),
+      categoryId: a.id().required(),
+      post: a.belongsTo('Post', 'postId'),
+      category: a.belongsTo('Category', 'categoryId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
+
+  Comment: a
+    .model({
+      content: a.string().required(),
+      authorName: a.string().required(),
+      authorEmail: a.string().required(),
+      postId: a.id().required(),
+      post: a.belongsTo('Post', 'postId'),
+      parentCommentId: a.id(),
+      parentComment: a.belongsTo('Comment', 'parentCommentId'),
+      replies: a.hasMany('Comment', 'parentCommentId'),
+    })
+    .authorization((rules) => [
+      rules.authenticated().to(['create', 'update', 'delete']),
+      rules.guest().to(['read'])
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,38 +102,8 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
+    defaultAuthorizationMode: 'userPool',
   },
+  logging: { fieldLogLevel: 'debug' },
+  name: 'amplify-gen2-blog',
 });
-
-/*== STEP 2 ===============================================================
-Go to your frontend source code. From your client-side code, generate a
-Data client to make CRUDL requests to your table. (THIS SNIPPET WILL ONLY
-WORK IN THE FRONTEND CODE FILE.)
-
-Using JavaScript or Next.js React Server Components, Middleware, Server 
-Actions or Pages Router? Review how to generate Data clients for those use
-cases: https://docs.amplify.aws/gen2/build-a-backend/data/connect-to-API/
-=========================================================================*/
-
-/*
-"use client"
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
-
-const client = generateClient<Schema>() // use this Data client for CRUDL requests
-*/
-
-/*== STEP 3 ===============================================================
-Fetch records from the database and use them in your frontend component.
-(THIS SNIPPET WILL ONLY WORK IN THE FRONTEND CODE FILE.)
-=========================================================================*/
-
-/* For example, in a React component, you can use this snippet in your
-  function's RETURN statement */
-// const { data: todos } = await client.models.Todo.list()
-
-// return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
