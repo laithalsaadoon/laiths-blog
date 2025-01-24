@@ -16,7 +16,7 @@ export default function App() {
   const [posts, setPosts] = useState<Array<Schema["Post"]["type"]>>([]);
 
   function listPosts() {
-    client.models.Post.observeQuery().subscribe({
+    client.models.Post.observeQuery({authMode: 'identityPool'}).subscribe({
       next: (data) => setPosts([...data.items]),
     });
   }
