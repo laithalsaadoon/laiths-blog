@@ -10,12 +10,10 @@ export default async function Home() {
       <header className="lg:flex lg:justify-between lg:items-center">
         <div className="max-w-2xl">
           <h1 className="mt-6 text-4xl font-bold tracking-tight gradient-text sm:text-5xl">
-            Software designer, founder, and amateur astronaut.
+            Welcome to my blog
           </h1>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400">
-            I'm a software designer and entrepreneur based in New York City. I'm the founder and
-            CEO of Planetaria, where we develop technologies that empower regular people to
-            explore space on their own terms.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="mt-6 flex gap-6">
             <Link
