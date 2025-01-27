@@ -1,78 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --color-rose-500: 244 63 94;
-  --color-purple-500: 168 85 247;
-  --gradient-start: var(--color-rose-500);
-  --gradient-end: var(--color-purple-500);
+	--color-rose-500: 244 63 94;
+	--color-purple-500: 168 85 247;
+	--gradient-start: var(--color-rose-500);
+	--gradient-end: var(--color-purple-500);
 }
 
 .dark {
-  --color-red-500: 239 68 68;
-  --color-blue-500: 59 130 246;
-  --gradient-start: var(--color-red-500);
-  --gradient-end: var(--color-blue-500);
+	--color-red-500: 239 68 68;
+	--color-blue-500: 59 130 246;
+	--gradient-start: var(--color-red-500);
+	--gradient-end: var(--color-blue-500);
 }
 
 @layer base {
-  body {
-    background-color: var(--color-white);
-    color: var(--color-gray-900);
-  }
-  
-  .dark body {
-    background-color: var(--color-gray-950);
-    color: var(--color-gray-100);
-  }
+	body {
+		background-color: var(--color-white);
+		color: var(--color-gray-900);
+	}
+
+	.dark body {
+		background-color: var(--color-gray-950);
+		color: var(--color-gray-100);
+	}
 }
 
 @utility gradient-text {
-  background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, rgb(var(--gradient-start)), rgb(var(--gradient-end)));
-  animation: gradient-x var(--animation-gradient-x);
+	background-clip: text;
+	color: transparent;
+	background-image: linear-gradient(
+		to right,
+		rgb(var(--gradient-start)),
+		rgb(var(--gradient-end))
+	);
+	animation: gradient-x var(--animation-gradient-x);
 }
 
 @utility gradient-border {
-  border-color: transparent;
-  background-image: linear-gradient(to right, rgb(var(--gradient-start)), rgb(var(--gradient-end)));
-  background-clip: border-box;
-  border-width: 2px;
-  animation: gradient-x var(--animation-gradient-x);
+	border-color: transparent;
+	background-image: linear-gradient(
+		to right,
+		rgb(var(--gradient-start)),
+		rgb(var(--gradient-end))
+	);
+	background-clip: border-box;
+	border-width: 2px;
+	animation: gradient-x var(--animation-gradient-x);
 }
 
 @utility gradient-bg {
-  background-image: linear-gradient(to right, rgb(var(--gradient-start)), rgb(var(--gradient-end)));
-  animation: gradient-x var(--animation-gradient-x);
+	background-image: linear-gradient(
+		to right,
+		rgb(var(--gradient-start)),
+		rgb(var(--gradient-end))
+	);
+	animation: gradient-x var(--animation-gradient-x);
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+	width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--color-gray-100);
+	background-color: var(--color-gray-100);
 }
 
 .dark ::-webkit-scrollbar-track {
-  background-color: var(--color-gray-800);
+	background-color: var(--color-gray-800);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-300);
-  border-radius: var(--radius-full);
+	background-color: var(--color-gray-300);
+	border-radius: var(--radius-full);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-600);
+	background-color: var(--color-gray-600);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-gray-400);
+	background-color: var(--color-gray-400);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-gray-500);
+	background-color: var(--color-gray-500);
 }

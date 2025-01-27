@@ -1,40 +1,40 @@
 {
-  "name": "laiths-blog",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@aws-amplify/adapter-nextjs": "^1.4.2",
-    "@tanstack/react-query": "^5.65.0",
-    "@tanstack/react-query-devtools": "^5.65.0",
-    "aws-amplify": "^6.12.2",
-    "clsx": "^2.1.1",
-    "next": "15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@aws-amplify/backend": "^1.14.0",
-    "@aws-amplify/backend-cli": "^1.4.8",
-    "@biomejs/biome": "1.9.4",
-    "@tailwindcss/postcss": "^4.0.0",
-    "@types/node": "^22.10.10",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "autoprefixer": "^10.4.20",
-    "aws-cdk": "^2.177.0",
-    "aws-cdk-lib": "^2.177.0",
-    "constructs": "^10.4.2",
-    "eslint": "^9.19.0",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
-  }
+	"name": "laiths-blog",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@aws-amplify/adapter-nextjs": "^1.4.2",
+		"@tanstack/react-query": "^5.65.0",
+		"@tanstack/react-query-devtools": "^5.65.0",
+		"aws-amplify": "^6.12.2",
+		"clsx": "^2.1.1",
+		"next": "15.1.6",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
+		"@aws-amplify/backend": "^1.14.0",
+		"@aws-amplify/backend-cli": "^1.4.8",
+		"@biomejs/biome": "1.9.4",
+		"@tailwindcss/postcss": "^4.0.0",
+		"@types/node": "^22.10.10",
+		"@types/react": "^19.0.8",
+		"@types/react-dom": "^19.0.3",
+		"autoprefixer": "^10.4.20",
+		"aws-cdk": "^2.177.0",
+		"aws-cdk-lib": "^2.177.0",
+		"constructs": "^10.4.2",
+		"eslint": "^9.19.0",
+		"eslint-config-next": "15.1.6",
+		"postcss": "^8.5.1",
+		"tailwindcss": "^4.0.0",
+		"tsx": "^4.19.2",
+		"typescript": "^5.7.3"
+	}
 }
