@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ThemeToggle } from './ThemeToggle'
 import clsx from 'clsx'
 
 const navigation = [
@@ -39,7 +38,6 @@ export function Navigation() {
           </Link>
         ))}
       </div>
-      <ThemeToggle />
     </nav>
   )
 } 

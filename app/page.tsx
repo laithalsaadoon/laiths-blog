@@ -1,45 +1,14 @@
-"use client"
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { ThemeToggle } from '../components/ThemeToggle'
-import { Amplify } from 'aws-amplify'
-import outputs from "@/amplify_outputs.json";
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
-import { useState, useEffect } from 'react';
+import { cookiesClient } from "@/utils/amplify-utils";
 
 
-Amplify.configure(outputs);
-
-const client = generateClient<Schema>();
-
-
-export default function Home() {
-  const [posts, setPosts] = useState<Array<Schema["Post"]["type"]>>([]);
-
-  function listPosts() {
-    client.models.Post.list({authMode: 'identityPool'}).then((posts) => {
-      setPosts(posts.data);
-    });
-  }
-
-  useEffect(() => {
-    listPosts();
-  }, []);
+export default async function Home() {
+  const {data: posts} = await cookiesClient.models.Post.list({authMode: 'identityPool'});
 
   return (
     <div className="py-20">
       <header className="lg:flex lg:justify-between lg:items-center">
         <div className="max-w-2xl">
-          <Image
-            src="/avatar.jpg"
-            alt="Avatar"
-            width={64}
-            height={64}
-            className="rounded-full"
-            priority
-          />
           <h1 className="mt-6 text-4xl font-bold tracking-tight gradient-text sm:text-5xl">
             Software designer, founder, and amateur astronaut.
           </h1>
@@ -66,7 +35,6 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-12 lg:mt-0 lg:pl-20">
-          <ThemeToggle />
         </div>
       </header>
 
