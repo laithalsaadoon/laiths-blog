@@ -28,6 +28,7 @@ const schema = a.schema({
       tags: a.hasMany('PostTag', 'postId'),
       categories: a.hasMany('PostCategory', 'postId'),
     })
+    .secondaryIndexes((index) => [index('slug')])
     .authorization((rules) => [
       rules.authenticated().to(['create', 'update', 'delete']),
       rules.guest().to(['read'])
