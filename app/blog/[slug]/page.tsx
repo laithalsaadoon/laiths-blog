@@ -12,7 +12,7 @@ const client = generateClient<Schema>({});
 
 // Force static generation
 export const dynamic = "force-static";
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 15 * 60; // Revalidate every 15 minutes
 
 async function getPost(slug: string) {
 	try {
