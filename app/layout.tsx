@@ -49,12 +49,12 @@ export default function RootLayout({
 			suppressHydrationWarning
 			className={`${inter.variable} antialiased`}
 		>
-			<body className={inter.className}>
+			<body className={`${inter.className} overflow-x-hidden`}>
 				<div className="relative min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
 					<AnimatedGrid />
 					<div className="relative">
 						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-							<header className="py-6 sm:py-8 lg:py-10">
+							<header className="pt-2 pb-4">
 								<Navigation />
 							</header>
 							<AmplifyProvider>

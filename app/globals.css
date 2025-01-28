@@ -21,8 +21,14 @@
 }
 
 @layer base {
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 0;
+	}
+
 	body {
 		@apply bg-white text-gray-900 antialiased;
+		overflow-anchor: none;
 	}
 
 	.dark body {
