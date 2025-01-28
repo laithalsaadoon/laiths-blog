@@ -25,23 +25,28 @@ export function Navigation() {
 	useEffect(() => {
 		// Handle hydration complete
 		setIsMounted(true);
+		setActiveHref(pathname);
 		// Prefetch all routes
 		for (const item of navigation) {
 			router.prefetch(item.href);
 		}
-	}, [router]);
+	}, [router, pathname]);
 
 	useEffect(() => {
 		if (!isChanging) {
-			setActiveHref(pathname);
+			setActiveHref(pathname === "/" ? "/" : pathname);
 		}
 	}, [pathname, isChanging]);
 
-	const handleMobileNavClick = (href: string) => {
+	const handleNavClick = (href: string) => {
 		setIsChanging(true);
 		setActiveHref(href);
-		setIsMobileMenuOpen(false);
 		setTimeout(() => setIsChanging(false), 200);
+	};
+
+	const handleMobileNavClick = (href: string) => {
+		handleNavClick(href);
+		setIsMobileMenuOpen(false);
 	};
 
 	return (
@@ -56,11 +61,7 @@ export function Navigation() {
 							<Link
 								key={item.href}
 								href={item.href}
-								onClick={() => {
-									setIsChanging(true);
-									setActiveHref(item.href);
-									setTimeout(() => setIsChanging(false), 200);
-								}}
+								onClick={() => handleNavClick(item.href)}
 								className={clsx(
 									"relative rounded-lg px-4 py-2.5 text-sm text-gray-700 transition-colors delay-150 hover:text-gray-900 hover:delay-0 dark:text-gray-400 dark:hover:text-gray-100",
 									isActive && "text-gray-900 dark:text-gray-100",
