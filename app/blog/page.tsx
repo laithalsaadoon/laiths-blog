@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import { BlogList } from "@/components/blog/BlogList";
 import BlogListLoading from "@/components/blog/BlogList.loading";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 // Force static generation
 export const dynamic = "force-static";
-export const revalidate = 15 * 60; // Revalidate every 15 minutes
+export const revalidate = 900; // Revalidate every 15 minutes
 
 export default async function BlogPage() {
 	return (

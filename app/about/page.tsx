@@ -9,9 +9,7 @@ export default function AboutPage() {
 					Hello! This is a placeholder for the About page. Here you can share
 					your story, background, interests, and what drives you.
 				</p>
-				<p className="mt-4">
-					Consider including:
-				</p>
+				<p className="mt-4">Consider including:</p>
 				<ul className="mt-2">
 					<li>Your professional background</li>
 					<li>What you're passionate about</li>

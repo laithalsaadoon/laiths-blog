@@ -1,5 +1,5 @@
 export default function BlogListLoading() {
-	const skeletonItems = ['first', 'second', 'third'];
+	const skeletonItems = ["first", "second", "third"];
 
 	return (
 		<div className="flex max-w-3xl flex-col space-y-16 animate-pulse">
@@ -22,4 +22,4 @@ export default function BlogListLoading() {
 			))}
 		</div>
 	);
-} 
+}

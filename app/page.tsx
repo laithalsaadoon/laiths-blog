@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { LatestPosts } from "@/components/blog/LatestPosts";
 import LatestPostsLoading from "@/components/blog/LatestPosts.loading";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function Home() {

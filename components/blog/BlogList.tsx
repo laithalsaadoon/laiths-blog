@@ -14,7 +14,7 @@ export async function BlogList() {
 							year: "numeric",
 							month: "long",
 							day: "numeric",
-					  })
+						})
 					: null;
 
 				return (
@@ -73,4 +73,4 @@ export async function BlogList() {
 			})}
 		</div>
 	);
-} 
+}
