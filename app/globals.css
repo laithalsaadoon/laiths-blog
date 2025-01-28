@@ -1,90 +1,94 @@
 @import "tailwindcss";
 
-:root {
-	--color-rose-500: 244 63 94;
-	--color-purple-500: 168 85 247;
-	--gradient-start: var(--color-rose-500);
-	--gradient-end: var(--color-purple-500);
-}
+@layer theme {
+	:root {
+		/* Modern color palette using OKLCH */
+		--color-primary: oklch(0.6 0.24 280);
+		--color-secondary: oklch(0.7 0.26 30);
+		--color-accent: oklch(0.8 0.12 200);
 
-.dark {
-	--color-red-500: 239 68 68;
-	--color-blue-500: 59 130 246;
-	--gradient-start: var(--color-red-500);
-	--gradient-end: var(--color-blue-500);
+		/* Theme tokens */
+		--ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+		--ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+		--spacing: 0.25rem;
+	}
+
+	.dark {
+		--color-primary: oklch(0.7 0.24 280);
+		--color-secondary: oklch(0.8 0.26 30);
+		--color-accent: oklch(0.9 0.12 200);
+	}
 }
 
 @layer base {
 	body {
-		background-color: var(--color-white);
-		color: var(--color-gray-900);
+		@apply bg-white text-gray-900 antialiased;
 	}
 
 	.dark body {
-		background-color: var(--color-gray-950);
-		color: var(--color-gray-100);
+		@apply bg-gray-950 text-gray-100;
 	}
 }
 
-@utility gradient-text {
-	background-clip: text;
-	color: transparent;
-	background-image: linear-gradient(
-		to right,
-		rgb(var(--gradient-start)),
-		rgb(var(--gradient-end))
-	);
-	animation: gradient-x var(--animation-gradient-x);
+/* Modern gradient utilities */
+@layer utilities {
+	.gradient-text {
+		background-image: linear-gradient(
+			to right,
+			var(--color-primary),
+			var(--color-secondary)
+		);
+		background-clip: text;
+		color: transparent;
+	}
+
+	.gradient-border {
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
+			padding: 2px;
+			background: linear-gradient(
+				to right,
+				var(--color-primary),
+				var(--color-secondary)
+			);
+			mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			mask-composite: exclude;
+		}
+	}
+
+	.gradient-bg {
+		background-image: linear-gradient(
+			to right,
+			var(--color-primary),
+			var(--color-secondary)
+		);
+	}
 }
 
-@utility gradient-border {
-	border-color: transparent;
-	background-image: linear-gradient(
-		to right,
-		rgb(var(--gradient-start)),
-		rgb(var(--gradient-end))
-	);
-	background-clip: border-box;
-	border-width: 2px;
-	animation: gradient-x var(--animation-gradient-x);
+/* Modern scrollbar styling */
+@layer utilities {
+	.custom-scrollbar {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-accent) transparent;
+
+		&::-webkit-scrollbar {
+			width: 6px;
+			height: 6px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--color-accent);
+			border-radius: 3px;
+		}
+	}
 }
 
-@utility gradient-bg {
-	background-image: linear-gradient(
-		to right,
-		rgb(var(--gradient-start)),
-		rgb(var(--gradient-end))
-	);
-	animation: gradient-x var(--animation-gradient-x);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
-}
-
-::-webkit-scrollbar-track {
-	background-color: var(--color-gray-100);
-}
-
-.dark ::-webkit-scrollbar-track {
-	background-color: var(--color-gray-800);
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: var(--color-gray-300);
-	border-radius: var(--radius-full);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-	background-color: var(--color-gray-600);
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-gray-400);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-gray-500);
-}
+/* Remove cursor wave animations */
